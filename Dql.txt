@@ -15,3 +15,57 @@ Esercizio 3
 
 select * from public."Fatture"
 where "Iva" = 20
+
+Esercizio 4
+
+SELECT *
+FROM public."Prodotti"
+WHERE EXTRACT(YEAR FROM "DataAttivazione")=2017
+
+Esercizio 5
+
+SELECT *
+FROM public."Fatture"
+JOIN public."Clienti" ON "IdCliente" = "NumeroCliente"
+WHERE "Importo" < 1000::money
+
+Esercizio 6
+
+SELECT "NumeroFattura","Tipologia","Importo","Iva","DataFattura","Denominazione"
+FROM public."Fatture"
+JOIN public."Fornitori" ON "Fatture"."NumeroFornitore" = "Fornitori"."NumeroFornitore"
+
+Esercizio 7
+
+SELECT COUNT(EXTRACT(YEAR FROM "DataFattura"))
+FROM public."Fatture"
+WHERE "Iva" = 20
+
+Esercizio 8
+
+SELECT COUNT("Fatture"), SUM("Importo"), (EXTRACT(YEAR FROM "DataFattura")) AS year
+FROM public."Fatture"
+GROUP BY year
+
+Esercizio EXTRA 1
+
+SELECT (EXTRACT(YEAR FROM "DataFattura")) AS year
+FROM public."Fatture"
+WHERE "Tipologia" = 'A'
+GROUP BY year
+HAVING COUNT(*) > 2
+
+Esercizio EXTRA 2
+
+SELECT SUM("Importo"), "RegioneResidenza"
+FROM public."Fatture"
+JOIN public."Clienti" ON "IdCliente" = "NumeroCliente"
+GROUP BY "RegioneResidenza"
+
+Esercizio EXTRA 3
+
+SELECT "NumeroCliente", "Cognome", COUNT(*)
+FROM public."Clienti"
+JOIN public."Fatture" ON "NumeroCliente" = "IdCliente"
+WHERE "Anno di Nascita" = 1980 AND "Importo" > 50::money
+GROUP BY "NumeroCliente"
