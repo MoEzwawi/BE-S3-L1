@@ -1,0 +1,17 @@
+SELECT * FROM public."Clienti"
+ORDER BY "NumeroCliente" DESC
+
+Esercizio 1
+
+SELECT * FROM public."Clienti"
+WHERE "Nome" = 'Mario'
+
+Esercizio 2
+
+SELECT * FROM public."Clienti"
+WHERE Anno&di&Nascita = 1982
+
+Esercizio 3
+
+select * from public."Fatture"
+where "Iva" = 20
