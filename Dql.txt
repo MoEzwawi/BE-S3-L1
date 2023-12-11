@@ -64,8 +64,18 @@ GROUP BY "RegioneResidenza"
 
 Esercizio EXTRA 3
 
+// Versione intermedia
+
 SELECT "NumeroCliente", "Cognome", COUNT(*)
 FROM public."Clienti"
 JOIN public."Fatture" ON "NumeroCliente" = "IdCliente"
 WHERE "Anno di Nascita" = 1980 AND "Importo" > 50::money
 GROUP BY "NumeroCliente"
+
+// Versione migliorata
+
+SELECT COUNT(*)
+FROM public."Clienti"
+WHERE "NumeroCliente" IN
+(SELECT "IdCliente" FROM public."Fatture" WHERE "Importo" > 50::money)
+AND "Anno di Nascita" = 1980
